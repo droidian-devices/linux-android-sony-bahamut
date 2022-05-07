@@ -11,7 +11,7 @@ VARIANT = android
 KERNEL_BASE_VERSION = 4.14-0
 
 # The kernel cmdline to use
-KERNEL_BOOTIMAGE_CMDLINE = androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=2048 loop.max_part=16 androidboot.usbcontroller=a600000.dwc3 buildproduct=bahamut_dsds buildid=KUMANO-1.2.0-210818-1151 panic_on_err=1 androidboot.selinux=permissive systemd.unified_cgroup_hierarchy=0
+KERNEL_BOOTIMAGE_CMDLINE = androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=2048 loop.max_part=16 androidboot.usbcontroller=a600000.dwc3 buildproduct=bahamut_dsds buildid=KUMANO-1.2.0-210818-1151 panic_on_err=1 androidboot.selinux=permissive systemd.unified_cgroup_hierarchy=0 droidian.lvm.prefer
 
 # Slug for the device vendor. This is going to be used in the KERNELRELASE
 # and package names.
