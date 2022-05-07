@@ -130,6 +130,9 @@ FLASH_IS_LEGACY_DEVICE = 0
 # recommended.
 FLASH_INFO_CPU = Qualcomm Technologies, Inc SM8150
 
+# Space-separated list of supported device ids as reported by fastboot
+FLASH_INFO_DEVICE_IDS = J9210 J9260 J8270 J8210
+
 ########################################################################
 # Kernel build settings
 ########################################################################
