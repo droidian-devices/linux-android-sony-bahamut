@@ -29,10 +29,7 @@ KERNEL_BASE_DEFCONFIG = vendor/sm8150-perf_defconfig
 KERNEL_PRODUCT_DIFFCONFIG = $(DEVICE_MODEL)_diffconfig
 
 # Whether to include DTBs with the image. Use 0 (no) or 1.
-#
-# Device specific: KERNEL_BUILD_TARGET is Image-dtb, so it gets done automatically
-# by the kernel build process. This can thus stay disabled.
-KERNEL_IMAGE_WITH_DTB = 0
+KERNEL_IMAGE_WITH_DTB = 1
 
 # Path to the DTB
 # If you leave this undefined, an attempt to find it automatically
@@ -170,4 +167,4 @@ DEB_BUILD_FOR = arm64
 KERNEL_ARCH = arm64
 
 # Kernel target to build
-KERNEL_BUILD_TARGET = Image-dtb
+KERNEL_BUILD_TARGET = Image.gz
