@@ -20,13 +20,27 @@ DEVICE_VENDOR = sony
 # Slug for the device model. Like above.
 DEVICE_MODEL = bahamut
 
+# Slug for the device platform. If unsure, keep this commented.
+DEVICE_PLATFORM = kumano
+
 # Marketing-friendly full-name. This will be used inside package descriptions
 DEVICE_FULL_NAME = Sony Xperia 5
 
-# Defconfig to use
-# Sony specific
-KERNEL_BASE_DEFCONFIG = vendor/sm8150-perf_defconfig
+# Whether to use configuration fragments to augment the kernel configuration.
+# If unsure, keep this to 0.
+KERNEL_CONFIG_USE_FRAGMENTS = 1
+
+# Whether to use diffconfig to generate the device-specific configuration.
+# If you enable this, you should set KERNEL_CONFIG_USE_FRAGMENTS to 1.
+# If unsure, keep this to 0.
+KERNEL_CONFIG_USE_DIFFCONFIG = 1
+
+# The diffconfig to apply. Only used when KERNEL_CONFIG_USE_DIFFCONFIG is
+# enabled.
 KERNEL_PRODUCT_DIFFCONFIG = $(DEVICE_MODEL)_diffconfig
+
+# Defconfig to use
+KERNEL_DEFCONFIG = vendor/sm8150-perf_defconfig
 
 # Whether to include DTBs with the image. Use 0 (no) or 1.
 KERNEL_IMAGE_WITH_DTB = 1
