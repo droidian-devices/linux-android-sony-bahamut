@@ -56,7 +56,11 @@ KERNEL_IMAGE_WITH_DTB_OVERLAY = 1
 # Path to the DTB overlay.
 # If you leave this undefined, an attempt to find it automatically
 # will be made.
-#KERNEL_IMAGE_DTB_OVERLAY = arch/arm64/boot/dts/qcom/my_overlay.dtbo
+KERNEL_IMAGE_DTB_OVERLAY = arch/arm64/boot/dts/somc/sm8150-kumano-bahamut_generic-overlay.dtbo
+
+# (Board specific)
+# DTB overlay for Sony Xperia 1 (griffin)
+GRIFFIN_KERNEL_IMAGE_DTB_OVERLAY = arch/arm64/boot/dts/somc/sm8150-kumano-griffin_generic-overlay.dtbo
 
 # Whether to include the DTB Overlay into the kernel image
 # Use 0 (no, default) or 1.
@@ -143,6 +147,11 @@ FLASH_INFO_CPU = Qualcomm Technologies, Inc SM8150
 
 # Space-separated list of supported device ids as reported by fastboot
 FLASH_INFO_DEVICE_IDS = J9210 J9260 J8270 J8210
+
+# (Board specific)
+# Space-separated list of supported device ids as reported by fastboot
+# for Sony Xperia 1 (griffin)
+GRIFFIN_FLASH_INFO_DEVICE_IDS = J8110 J8170 J9110 J9180
 
 ########################################################################
 # Kernel build settings

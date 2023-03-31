@@ -7,5 +7,34 @@ include /usr/share/linux-packaging-snippets/kernel-snippet.mk
 # Use external device-tree-compiler
 BUILD_COMMAND := $(BUILD_COMMAND) DTC_EXT=dtc
 
+# Sony Xperia 1 (griffin)
+GRIFFIN_KERNEL_RELEASE = $(KERNEL_BASE_VERSION)-$(DEVICE_VENDOR)-griffin
+
 %:
 	dh $@
+
+debian/control:
+	sed -e "s|@KERNEL_BASE_VERSION@|$(KERNEL_BASE_VERSION)|g" \
+		-e "s|@VARIANT@|$(VARIANT)|g" \
+		-e "s|@DEVICE_VENDOR@|$(DEVICE_VENDOR)|g" \
+		-e "s|@DEVICE_MODEL@|$(DEVICE_MODEL)|g" \
+		-e "s|@DEVICE_FULL_NAME@|$(DEVICE_FULL_NAME)|g" \
+		-e "s|@DEB_TOOLCHAIN@|$(DEB_TOOLCHAIN)|g" \
+		-e "s|@DEB_BUILD_ON@|$(DEB_BUILD_ON)|g" \
+		-e "s|@DEB_BUILD_FOR@|$(DEB_BUILD_FOR)|g" \
+		/usr/share/linux-packaging-snippets/control.in > debian/control
+	cat $(CURDIR)/debian/control-extra.in >> debian/control
+
+out/KERNEL_OBJ/griffin-dtbo.img: out/dtb-stamp
+		mkdtboimg create $@ $(KERNEL_OUT)/$(GRIFFIN_KERNEL_IMAGE_DTB_OVERLAY)
+
+override_dh_auto_install: kernel_snippet_install out/KERNEL_OBJ/griffin-dtbo.img
+	# Create package contents for griffin
+	cp -Rav $(CURDIR)/debian/linux-bootimage-$(KERNEL_RELEASE) $(CURDIR)/debian/linux-bootimage-$(GRIFFIN_KERNEL_RELEASE)
+	cp -a $(CURDIR)/debian/linux-bootimage-$(KERNEL_RELEASE).postinst $(CURDIR)/debian/linux-bootimage-$(GRIFFIN_KERNEL_RELEASE).postinst
+
+	# Replace DTBO
+	cp -v $(KERNEL_OUT)/griffin-dtbo.img $(CURDIR)/debian/linux-bootimage-$(GRIFFIN_KERNEL_RELEASE)/boot/dtbo.img-$(KERNEL_RELEASE)
+
+	# Adjust EXTRA_INFO_DEVICE_IDS
+	sed -i 's|$(FLASH_INFO_DEVICE_IDS)|$(GRIFFIN_FLASH_INFO_DEVICE_IDS)|g' $(CURDIR)/debian/linux-bootimage-$(GRIFFIN_KERNEL_RELEASE)/lib/flash-bootimage/$(KERNEL_RELEASE).conf
